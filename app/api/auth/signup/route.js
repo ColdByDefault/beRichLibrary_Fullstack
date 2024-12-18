@@ -1,10 +1,9 @@
-import  {supabase}  from "../../../../lib/supabase";
+import { supabase } from "../../../../lib/supabase";
 
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
 
-    // Supabase Auth handles encryption
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
