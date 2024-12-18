@@ -40,7 +40,7 @@ export default function SignUpForm() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
 
-      setSuccess("Account created successfully!");
+      setSuccess("Verification sent successfully!");
     } catch (err) {
       setError(err.message);
     }
