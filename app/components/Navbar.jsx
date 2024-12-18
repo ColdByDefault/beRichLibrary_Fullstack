@@ -81,34 +81,42 @@ function Navbar() {
             </button>
             {/* Navigation Links */}
             <div
-              className={`${
-                isMenuOpen ? "block" : "hidden"
-              } w-full lg:flex lg:w-auto`}
-            >
-              <div className="flex flex-col lg:flex-row lg:space-x-4">
-                <a
-                  href="/"
-                  className="text-white hover:text-blue-500 px-4 py-2"
-                  onClick={(e) => handleLinkClick(e, "/")}
-                >
-                  Home
-                </a>
-                <a
-                  href="/docs"
-                  className="text-white hover:text-blue-500 px-4 py-2"
-                  onClick={(e) => handleLinkClick(e, "/docs")}
-                >
-                  Docs
-                </a>
-                <a
-                  href="/others"
-                  className="text-white hover:text-blue-500 px-4 py-2"
-                  onClick={(e) => handleLinkClick(e, "/others")}
-                >
-                  Others
-                </a>
+                className={`${
+                  isMenuOpen ? "block" : "hidden"
+                } w-full lg:flex lg:w-auto`}
+              >
+                <div className="flex flex-col lg:flex-row lg:space-x-4">
+                  <a
+                    href="/"
+                    className="text-white hover:text-blue-500 px-4 py-2"
+                    onClick={(e) => handleLinkClick(e, "/")}
+                  >
+                    Home
+                  </a>
+                  <a
+                    href="/docs"
+                    className="text-white hover:text-blue-500 px-4 py-2"
+                    onClick={(e) => handleLinkClick(e, "/docs")}
+                  >
+                    Docs
+                  </a>
+                  <a
+                    href="/others"
+                    className="text-white hover:text-blue-500 px-4 py-2"
+                    onClick={(e) => handleLinkClick(e, "/others")}
+                  >
+                    Others
+                  </a>
+                  <a
+                    href="/signup"
+                    className="text-white hover:text-blue-500 px-4 py-2 font-semibold"
+                    onClick={(e) => handleLinkClick(e, "/signup")}
+                  >
+                    Sign Up
+                  </a>
+                </div>
               </div>
-            </div>
+
           </div>
         </nav>
       </div>
