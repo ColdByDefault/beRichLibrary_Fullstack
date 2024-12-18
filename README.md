@@ -1,7 +1,6 @@
-beRich.Library V3.1.1
-New deployment for beRich Next.js Fullstack Web App
-
-!IMPORTANT: Review Security Issue
+# beRich.Library 
+## V3.1.1
+Next.js Fullstack Web App
 
 This project is part of a bigger project under the repository: [coldbydefault.github.io](https://github.com/ColdByDefault/coldbydefault.github.io), with the official domain: [www.coldbydefault.com](https://www.coldbydefault.com). 
 
@@ -26,9 +25,9 @@ The project is built using the following technologies:
 ## Official Website
 The official deployment of this project is hosted at:
 
-[www.coldbydefault.com/RoseLibrary](https://berichlibrary.coldbydefault.com)
+[berRich](https://berichlibrary.coldbydefault.com)
 
-For more updates and projects, visit [coldbydefault.github.io](https://www.coldbydefault.com).
+For more updates and projects, visit [coldbydefault](https://www.coldbydefault.com).
 
 ---
 
