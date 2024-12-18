@@ -22,7 +22,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Navbar />
-        <div>{children}</div>
+        {/* Add a page transition wrapper */}
+        <div id="page-content">{children}</div>
       </body>
     </html>
   );

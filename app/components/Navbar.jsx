@@ -3,6 +3,7 @@
 import React from "react";
 import Background from "./Background";
 import Link from "next/link";
+import  TransitionLink  from "../utils/TransitionLink";
 
 function Navbar() {
   return (
@@ -22,15 +23,15 @@ function Navbar() {
             </div>
             {/* Navigation Links */}
             <div className="flex space-x-4">
-              <Link href="/" className="text-white hover:text-blue-500">
+              <TransitionLink href="/" className="text-white hover:text-blue-500">
                 Home
-              </Link>
-              <Link href="/docs" className="text-white hover:text-blue-500">
+              </TransitionLink>
+              <TransitionLink href="/docs" className="text-white hover:text-blue-500">
                 Docs
-              </Link>
-              <Link href="/others" className="text-white hover:text-blue-500">
+              </TransitionLink>
+              <TransitionLink href="/others" className="text-white hover:text-blue-500">
                 Others
-              </Link>
+              </TransitionLink>
             </div>
           </div>
         </nav>
