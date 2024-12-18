@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useEffect, useRef } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation"; // For programmatic navigation
 
 function Navbar() {
   const canvasRef = useRef(null);
+  const router = useRouter();
 
   // Background Animation Logic
   useEffect(() => {
@@ -67,17 +68,28 @@ function Navbar() {
 
   // Page Transition Logic
   const handleLinkClick = (e, href) => {
-    e.preventDefault(); // Prevent default navigation
-
+    e.preventDefault();
+  
     const pageContent = document.getElementById("page-content");
     if (pageContent) {
-      pageContent.classList.add("page-transition");
+      // Add exit animation
+      pageContent.classList.add("page-transition-exit");
     }
-
+  
     setTimeout(() => {
-      window.location.href = href; // Navigate after transition
-    }, 300);
+      // Navigate using router.push
+      router.push(href);
+  
+      // Reset transition class on navigation
+      setTimeout(() => {
+        if (pageContent) {
+          pageContent.classList.remove("page-transition-exit");
+          pageContent.classList.add("page-transition-enter");
+        }
+      }, 50); // Small delay for entering animation
+    }, 400); // Match the exit animation duration
   };
+  
 
   return (
     <header className="absolute top-0 z-10 w-full">
@@ -103,27 +115,27 @@ function Navbar() {
 
             {/* Navigation Links */}
             <div className="flex space-x-4">
-              <Link
+              <a
                 href="/"
                 className="text-white hover:text-blue-500"
                 onClick={(e) => handleLinkClick(e, "/")}
               >
                 Home
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/docs"
                 className="text-white hover:text-blue-500"
                 onClick={(e) => handleLinkClick(e, "/docs")}
               >
                 Docs
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/others"
                 className="text-white hover:text-blue-500"
                 onClick={(e) => handleLinkClick(e, "/others")}
               >
                 Others
-              </Link>
+              </a>
             </div>
           </div>
         </nav>

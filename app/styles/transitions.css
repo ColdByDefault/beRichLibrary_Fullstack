@@ -1,0 +1,39 @@
+/* Fade and Slide Page Transition */
+@keyframes fadeSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+}
+    50% {
+        opacity: 0.5;
+        transform: translateY(-10px);
+}
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+}
+}
+
+/* Add to Page Content on Transition */
+.page-transition-enter {
+    animation: fadeSlideIn 0.5s ease-out forwards;
+}
+
+.page-transition-exit {
+    animation: fadeSlideOut 0.4s ease-in forwards;
+}
