@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Import the useRouter hook
 
 export default function LoginForm() {
+  const router = useRouter(); // Initialize the router
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,6 +36,7 @@ export default function LoginForm() {
       if (!res.ok) throw new Error(data.error || "Something went wrong");
 
       setSuccess("Login successful!");
+      router.push("/"); // Redirect to the home page after success
     } catch (err) {
       setError(err.message);
     }
