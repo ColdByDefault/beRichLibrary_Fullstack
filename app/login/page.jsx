@@ -1,5 +1,5 @@
-import LoginForm from "../components/Login-Form";
+import LogInForm2 from "./components/LogInForm2.jsx";
 
 export default function LoginPage() {
-  return <LoginForm />;
+  return <LogInForm2 />;
 }
