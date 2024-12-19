@@ -1,3 +1,7 @@
+// This is the route for the login endpoint.
+// It is responsible for authenticating a user with their email and password.
+// It uses the Supabase client to sign in the user.
+
 import { supabase } from "../../../../lib/supabase";
 
 export async function POST(req) {

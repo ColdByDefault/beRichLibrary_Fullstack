@@ -3,20 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
+  --background: #c9c9d3;
   --foreground: #000000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #000000;
-  }
-}
+
 
 body {
-  color: var(--foreground);
   background: var(--background);
+  color: #000000;
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
 }

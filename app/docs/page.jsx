@@ -1,3 +1,6 @@
+// Code: Docs page component
+// Coming soon
+
 import React from "react";
 
 export default function Docs() {

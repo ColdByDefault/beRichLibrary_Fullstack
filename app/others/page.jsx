@@ -1,3 +1,4 @@
+// coming soon
 import React from "react";
 
 export default function Others() {
@@ -10,3 +11,7 @@ export default function Others() {
     </div>
   );
 }
+
+
+// Glitch effect for the loading screen
+// css

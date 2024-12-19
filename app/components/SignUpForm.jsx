@@ -1,6 +1,14 @@
+// Code for the SignUpForm component
+// related files: app/pages/signup.jsx
+// app/api/auth/signup.js
+// POST REQUEST to create a new user handeled by supabase
+// after successful signup, a verification email will be sent
+ 
+
 "use client";
 
 import { useState } from "react";
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -12,6 +20,8 @@ export default function SignUpForm() {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,78 +56,105 @@ export default function SignUpForm() {
     }
   };
 
+  const togglePasswordVisibility = (field) => {
+    if (field === 'password') {
+      setShowPassword(!showPassword);
+    } else {
+      setShowConfirmPassword(!showConfirmPassword);
+    }
+  };
+
   return (
-    <div className="flex justify-center items-center min-h-screen w-full bg-black">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 text-white p-8 rounded-lg shadow-lg max-w-md w-full"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center ">Sign Up</h2>
+    <div className="flex justify-center items-center min-h-screen w-full p-4 ">
+      <div className="bg-white text-gray-800 p-8 rounded-lg shadow-2xl max-w-md w-full">
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Sign Up</h2>
 
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        {success && <p className="text-green-500 mb-4">{success}</p>}
+        {error && <p className="text-red-500 mb-4 text-center bg-red-100 p-2 rounded">{error}</p>}
+        {success && <p className="text-green-500 mb-4 text-center bg-green-100 p-2 rounded">{success}</p>}
 
-        <div className="mb-4">
-          <label className="block mb-2">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block mb-2 font-semibold text-gray-700">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label className="block mb-2">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+          <div>
+            <label className="block mb-2 font-semibold text-gray-700">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label className="block mb-2">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+          <div>
+            <label className="block mb-2 font-semibold text-gray-700">Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility('password')}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+              </button>
+            </div>
+          </div>
 
-        <div className="mb-6">
-          <label className="block mb-2">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+          <div>
+            <label className="block mb-2 font-semibold text-gray-700">Confirm Password</label>
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility('confirmPassword')}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              >
+                {showConfirmPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+              </button>
+            </div>
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
-        >
-          Sign Up
-        </button>
-      </form>
-      <p className="text-center text-gray-400 mt-4">
-        Already have an account?{" "}
-        <a href="/login" className="text-blue-500 hover:underline">
-          Log in
-        </a>
-      </p>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded transition duration-300 transform hover:scale-105"
+          >
+            Sign Up
+          </button>
+        </form>
+
+        <p className="text-center text-gray-600 mt-6">
+          Already have an account?{" "}
+          <a href="/login" className="text-blue-600 hover:underline font-semibold">
+            Log in
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
+

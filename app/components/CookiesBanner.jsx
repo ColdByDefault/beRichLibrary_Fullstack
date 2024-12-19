@@ -1,3 +1,8 @@
+// Code: CookiesBanner component to display a banner to inform users about cookies 
+// usage and ask for their consent to accept cookies.
+// Related file: app/banner/page.jsx
+// CSR compatible
+
 'use client';
 
 import React, { useState, useEffect } from 'react';

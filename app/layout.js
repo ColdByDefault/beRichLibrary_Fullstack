@@ -1,3 +1,9 @@
+// Description: This file contains the layout of the application.
+// created by: AnotherProject-Team {ColdByDefault}
+// Date: 18/12/2024
+// CopyRight: All rights reserved
+// Version: 3.1.1
+// NOT TO BE USED WITHOUT PERMISSION FROM THE AUTHOR (www.coldbydefault.com {ColdByDefault})
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";

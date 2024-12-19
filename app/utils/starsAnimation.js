@@ -1,18 +1,22 @@
+// Code for the star animation in the background of the Navbar component
+// This code is used in the Navbar component to create a star animation in the background.
+// Keys: to control the number of stars, speed, depth, size, flash intensity, flash duration, and flash interval.
+
 export const initializeCanvas = (
     canvas,
     starCount = 100,
     speed = 0.3,
     maxDepth = 30,
-    starSizes = [0.3, 0.5, 0.7, 1, 1.2], // Array of star sizes
-    flashIntensity = 50, // Intensity multiplier for the flash
-    flashDuration = 500, // Duration of the flash in milliseconds
-    flashInterval = 300 // Minimum interval between flashes in milliseconds
+    starSizes = [0.3, 0.5, 0.7, 1, 1.2], 
+    flashIntensity = 50, 
+    flashDuration = 500, 
+    flashInterval = 300 
   ) => {
     const ctx = canvas.getContext("2d");
     const stars = [];
     let flashingStarIndex = null;
   
-    // Create a star with a size picked from the array
+
     const createStar = () => {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
@@ -20,7 +24,7 @@ export const initializeCanvas = (
       const size = starSizes[Math.floor(Math.random() * starSizes.length)];
       const dx = (Math.random() - 0.5) * speed * (z / maxDepth);
       const dy = (Math.random() - 0.5) * speed * (z / maxDepth);
-      return { x, y, dx, dy, z, size, shine: 1 }; // Shine controls brightness
+      return { x, y, dx, dy, z, size, shine: 1 }; 
     };
   
     const drawStar = (star) => {
@@ -52,10 +56,8 @@ export const initializeCanvas = (
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       stars.forEach((star, index) => {
         if (index === flashingStarIndex) {
-          // Apply the flash effect
           star.shine = flashIntensity;
         } else {
-          // Reset shine
           star.shine = 1;
         }
         drawStar(star);
@@ -64,22 +66,21 @@ export const initializeCanvas = (
       requestAnimationFrame(animate);
     };
   
-    // Handle random star flash
     const flashRandomStar = () => {
       flashingStarIndex = Math.floor(Math.random() * stars.length);
       setTimeout(() => {
-        flashingStarIndex = null; // Reset flash effect
+        flashingStarIndex = null; 
       }, flashDuration);
   
-      // Schedule the next flash
+
       setTimeout(flashRandomStar, flashInterval + Math.random() * flashInterval);
     };
   
-    // Initialize canvas and start animation
+
     canvas.width = canvas.parentElement.offsetWidth;
     canvas.height = canvas.parentElement.offsetHeight;
     initializeStars();
     animate();
-    flashRandomStar(); // Start the flashing effect
-  };
+    flashRandomStar(); 
+};
   

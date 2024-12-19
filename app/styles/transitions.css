@@ -29,7 +29,7 @@
 }
 }
 
-/* Add to Page Content on Transition */
+
 .page-transition-enter {
     animation: fadeSlideIn 0.5s ease-out forwards;
 }

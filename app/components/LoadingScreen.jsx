@@ -1,3 +1,9 @@
+// Code to display a loading screen with a glitch effect
+// Related file: app/components/LoadingScreen.jsx
+// app/loading/page.jsx
+// app/styles/glitchEffect.css
+// Only appears the first time the user visits the site
+
 'use client';
 
 import React, { useEffect, useState } from "react";

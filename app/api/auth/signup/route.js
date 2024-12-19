@@ -1,3 +1,8 @@
+// This file is responsible for handling the POST request to sign up a new user.
+// It uses the Supabase client to sign up the user with the provided email and password.
+// If the sign-up is successful, it returns a success message and the user data. else it returns an error message.
+// Supabase will send a verification email to the user's email address to verify the account.
+
 import { supabase } from "../../../../lib/supabase";
 
 export async function POST(req) {
@@ -20,7 +25,7 @@ export async function POST(req) {
     if (error) {
       return new Response(
         JSON.stringify({ error: error.message }),
-        { status: 400 } // Use status 400 for client-side errors
+        { status: 400 } //  400 for client-side errors
       );
     }
 
