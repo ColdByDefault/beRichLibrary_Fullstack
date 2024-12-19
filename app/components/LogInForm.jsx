@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Import the useRouter hook
 
-export default function LoginForm() {
+export default function LogInForm() {
   const router = useRouter(); // Initialize the router
   const [formData, setFormData] = useState({
     email: "",
