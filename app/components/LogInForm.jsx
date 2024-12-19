@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 
-export default function SignUpForm() {
+export default function LoginForm() {
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
   const [error, setError] = useState(null);
@@ -23,24 +21,19 @@ export default function SignUpForm() {
     setError(null);
     setSuccess(null);
 
-    const { username, email, password, confirmPassword } = formData;
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match!");
-      return;
-    }
+    const { email, password } = formData;
 
     try {
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
 
-      setSuccess("Verification Email sent successfully!");
+      setSuccess("Login successful!");
     } catch (err) {
       setError(err.message);
     }
@@ -52,22 +45,10 @@ export default function SignUpForm() {
         onSubmit={handleSubmit}
         className="bg-gray-800 text-white p-8 rounded-lg shadow-lg max-w-md w-full"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center ">Sign Up</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">Login</h2>
 
         {error && <p className="text-red-500 mb-4">{error}</p>}
         {success && <p className="text-green-500 mb-4">{success}</p>}
-
-        <div className="mb-4">
-          <label className="block mb-2">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
 
         <div className="mb-4">
           <label className="block mb-2">Email</label>
@@ -93,31 +74,13 @@ export default function SignUpForm() {
           />
         </div>
 
-        <div className="mb-6">
-          <label className="block mb-2">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-
         <button
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
         >
-          Sign Up
+          Login
         </button>
       </form>
-      <p className="text-center text-gray-400 mt-4">
-        Already have an account?{" "}
-        <a href="/login" className="text-blue-500 hover:underline">
-          Log in
-        </a>
-      </p>
     </div>
   );
 }
