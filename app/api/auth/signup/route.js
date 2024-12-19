@@ -1,9 +1,8 @@
 import { supabase } from "../../../../lib/supabase";
 
 export async function POST(req) {
-  // Prevent execution during build if environment variables are missing
   if (!supabase) {
-    console.error("Supabase is not initialized. Skipping API execution.");
+    console.error("Supabase is not initialized.");
     return new Response(
       JSON.stringify({ error: "Supabase is not available during build." }),
       { status: 500 }
@@ -19,7 +18,10 @@ export async function POST(req) {
     });
 
     if (error) {
-      throw new Error(error.message);
+      return new Response(
+        JSON.stringify({ error: error.message }),
+        { status: 400 } // Use status 400 for client-side errors
+      );
     }
 
     return new Response(
