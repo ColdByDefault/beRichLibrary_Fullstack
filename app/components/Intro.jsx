@@ -1,21 +1,15 @@
-'use client';
+
 
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
+
 
 function Intro() {
-  const searchParams = useSearchParams();
-  const welcome = searchParams.get('welcome'); // Retrieve the 'welcome' query parameter
+
 
   return (
     <div className="relative w-full h-screen pt-32 flex items-center justify-center overflow-hidden">
       <div className="text-black text-center z-20 px-4">
-        {welcome === 'true' && (
-          <div className="absolute top-32 w-1/3 bg-gray-400 text-blue-800 p-4 rounded-lg mb-8">
-            <h3 className="text-xl font-semibold">Welcome Back!</h3>
-            <p>We're glad to see you again.</p>
-          </div>
-        )}
+
         <h4 className="uppercase text-sm tracking-wider mb-2">Exclusive Window</h4>
         <h1 className="text-3xl lg:text-5xl font-bold mb-4" style={{ transform: "translateZ(20px)" }}>
           beRich<span className="text-blue-800">Hub</span><span className="text-sm">v3.1.1=&gt;</span><br />
