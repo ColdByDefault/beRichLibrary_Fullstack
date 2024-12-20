@@ -15,15 +15,15 @@ export async function POST(req) {
   }
 
   try {
-    const { email, password, username } = await req.json(); // Accept `username` in the request
+    const { email, password, username } = await req.json();
 
-    // Sign up the user and include metadata (username)
+    // Sign up the user and include metadata
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          username, // Add username to raw_user_meta_data
+          username, // Metadata to store in auth.users
         },
       },
     });
@@ -31,17 +31,19 @@ export async function POST(req) {
     if (error) {
       return new Response(
         JSON.stringify({ error: error.message }),
-        { status: 400 } // Client-side error
+        { status: 400 }
       );
     }
 
-    // Add an entry to the `profiles` table
+    // Insert into the profiles table using user_id from auth.users
+    const { user } = data;
+
     const { error: profileError } = await supabase
-      .from("profiles") // Sync with the profiles table
+      .from("profiles")
       .insert({
-        id: data.user.id, // Use the user ID from the auth table
-        email,
-        username,
+        user_id: user.id, // Use the user ID from auth.users
+        username,         // Pass username to profiles table
+        email,            // Optional: Store email in profiles table
       });
 
     if (profileError) {
@@ -64,4 +66,5 @@ export async function POST(req) {
     );
   }
 }
+
 
