@@ -31,7 +31,7 @@ export const metadata = {
     siteName: "beRich.Library",
     images: [
       {
-        url: "https://berichlibrary.coldbydefault.com/beRich.png", // fixed image name
+        url: "/beRich.png", // fixed image name
         width: 1200,
         height: 630,
         alt: "BeRich Library",
@@ -44,7 +44,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "beRich.Library",
     description: "Discover and manage your books effortlessly with BeRich Library.",
-    images: ["https://berichlibrary.coldbydefault.com/beRich.png"],
+    images: ["/beRich.png"],
   },
 };
 

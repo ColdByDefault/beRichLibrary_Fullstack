@@ -15,17 +15,40 @@ export async function POST(req) {
   }
 
   try {
-    const { email, password } = await req.json();
+    const { email, password, username } = await req.json(); // Accept `username` in the request
 
+    // Sign up the user and include metadata (username)
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          username, // Add username to raw_user_meta_data
+        },
+      },
     });
 
     if (error) {
       return new Response(
         JSON.stringify({ error: error.message }),
-        { status: 400 } //  400 for client-side errors
+        { status: 400 } // Client-side error
+      );
+    }
+
+    // Add an entry to the `profiles` table
+    const { error: profileError } = await supabase
+      .from("profiles") // Sync with the profiles table
+      .insert({
+        id: data.user.id, // Use the user ID from the auth table
+        email,
+        username,
+      });
+
+    if (profileError) {
+      console.error("Error syncing with profiles:", profileError.message);
+      return new Response(
+        JSON.stringify({ error: "Error syncing profile data" }),
+        { status: 500 }
       );
     }
 
@@ -41,3 +64,4 @@ export async function POST(req) {
     );
   }
 }
+
