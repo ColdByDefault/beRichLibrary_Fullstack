@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { initializeCanvas } from "../utils/starsAnimation"; 
 import { Menu, X } from 'lucide-react';
+import WelcomMsgPage from "./WelcomeMsg";
 
 function Navbar() {
 
@@ -71,6 +72,9 @@ function Navbar() {
                   .Library
                 </span>
               </span>
+            </div>
+            <div className="aboslute top-0 left-0 ">
+                <WelcomMsgPage />
             </div>
             <button
               className="lg:hidden p-2 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"

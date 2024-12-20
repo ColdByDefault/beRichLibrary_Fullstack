@@ -9,7 +9,6 @@ function Intro() {
   return (
     <div className="relative w-full h-screen pt-32 flex items-center justify-center overflow-hidden">
       <div className="text-black text-center z-20 px-4">
-
         <h4 className="uppercase text-sm tracking-wider mb-2">Exclusive Window</h4>
         <h1 className="text-3xl lg:text-5xl font-bold mb-4" style={{ transform: "translateZ(20px)" }}>
           beRich<span className="text-blue-800">Hub</span><span className="text-sm">v3.1.1=&gt;</span><br />
