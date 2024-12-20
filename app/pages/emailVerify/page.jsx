@@ -9,7 +9,7 @@ const EmailVerifyPage = () => {
           Thank you! Your email has been verified. You can now log in to your account and start exploring.
         </p>
         <a
-          href="https://berichlibrary.coldbydefault.com/login"
+          href="https://berichlibrary.coldbydefault.com/pages/login"
           className="bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600 transition duration-200"
         >
           Log In

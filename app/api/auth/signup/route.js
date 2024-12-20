@@ -3,13 +3,15 @@
 // If the sign-up is successful, it returns a success message and the user data. else it returns an error message.
 // Supabase will send a verification email to the user's email address to verify the account.
 
+
+
 import { supabase } from "../../../../lib/supabase";
 
 export async function POST(req) {
   if (!supabase) {
     console.error("Supabase is not initialized.");
     return new Response(
-      JSON.stringify({ error: "Supabase is not available during build." }),
+      JSON.stringify({ error: "Supabase initialization failed." }),
       { status: 500 }
     );
   }
@@ -18,7 +20,7 @@ export async function POST(req) {
     const { email, password, username } = await req.json();
     console.log("Received data:", { email, password, username });
 
-    // Sign up the user (this automatically interacts with the auth.users table)
+    // Sign up the user
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -31,19 +33,17 @@ export async function POST(req) {
 
     if (error) {
       console.error("SignUp Error:", error.message);
-      return new Response(
-        JSON.stringify({ error: error.message }),
-        { status: 400 }
-      );
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 400,
+      });
     }
 
-    // Extract the user's ID
     const user = data.user;
 
     if (!user) {
-      console.error("SignUp Error: User object is null");
+      console.error("SignUp Error: User object is null.");
       return new Response(
-        JSON.stringify({ error: "User creation failed" }),
+        JSON.stringify({ error: "User creation failed." }),
         { status: 500 }
       );
     }
@@ -58,13 +58,15 @@ export async function POST(req) {
     if (profileError) {
       console.error("Profiles Table Error:", profileError.message);
       return new Response(
-        JSON.stringify({ error: "Error syncing profile data" }),
+        JSON.stringify({ error: "Error syncing profile data." }),
         { status: 500 }
       );
     }
 
     return new Response(
-      JSON.stringify({ message: "User signed up successfully. Please verify your email." }),
+      JSON.stringify({
+        message: "User signed up successfully. Please verify your email.",
+      }),
       { status: 201 }
     );
   } catch (error) {
@@ -75,5 +77,7 @@ export async function POST(req) {
     );
   }
 }
+
+
 
 
