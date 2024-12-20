@@ -1,7 +1,7 @@
 // Code: Navbar component for the website
 // related files: app/utils/starsAnimation.js
 // responsive, Burger menu, page transition, and stars animation
-// stars Aniation copyrights: ColdByDefault 
+// stars Animation copyrights: ColdByDefault 
 
 'use client';
 
@@ -11,6 +11,13 @@ import { initializeCanvas } from "../utils/starsAnimation";
 import { Menu, X } from 'lucide-react';
 
 function Navbar() {
+
+  const links = [
+    { label: "Intro", path: "/pages/intro" },
+    { label: "Account", path: "/pages/signup" },
+  ];
+
+
   const canvasRef = useRef(null);
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,6 +54,7 @@ function Navbar() {
     setIsMenuOpen((prev) => !prev);
   };
 
+
   return (
     <header className="absolute top-0 z-10 w-full pt-4">
       <div className="relative mx-auto lg:w-2/3 lg:rounded-xl">
@@ -77,13 +85,14 @@ function Navbar() {
               } absolute top-full left-0 right-0 lg:static lg:flex flex-col lg:flex-row w-full lg:w-auto 
               bg-black/50 backdrop-blur-sm lg:bg-transparent`}>
               <div className="flex flex-col lg:flex-row lg:space-x-8 p-4 lg:p-0">
-                {["Home", "Docs", "Others", "Sign Up"].map((item) => (
+                {links.map(({ label, path }) => (
                   <a
-                    key={item}
-                    href={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "")}`}
+                    key={label}
+                    href={path}
                     className="text-white hover:text-blue-500 py-2 lg:py-0 transition-colors duration-200 ease-in-out"
-                    onClick={(e) => handleLinkClick(e, item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "")}`)}>
-                    {item}
+                    onClick={(e) => handleLinkClick(e, path)}
+                  >
+                    {label}
                   </a>
                 ))}
               </div>

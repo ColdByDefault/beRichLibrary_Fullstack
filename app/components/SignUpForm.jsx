@@ -7,10 +7,12 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 export default function SignUpForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -51,6 +53,11 @@ export default function SignUpForm() {
       if (!res.ok) throw new Error(data.error || "Something went wrong");
 
       setSuccess("Verification Email sent successfully!");
+      
+      // Redirect to login page after 3 seconds
+      setTimeout(() => {
+        router.push('/pages/login');
+      }, 3000);
     } catch (err) {
       setError(err.message);
     }
@@ -64,13 +71,27 @@ export default function SignUpForm() {
     }
   };
 
+  if (success) {
+    return (
+      <div className="flex justify-center items-center min-h-screen w-full p-4">
+        <div className="bg-white text-gray-800 p-8 rounded-lg shadow-2xl max-w-md w-full">
+          <p className="text-green-500 text-center bg-green-100 p-4 rounded text-lg font-semibold">
+            {success}
+          </p>
+          <p className="text-center mt-4 text-gray-600">
+            Redirecting to login page...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen w-full p-4 ">
       <div className="bg-white text-gray-800 p-8 rounded-lg shadow-2xl max-w-md w-full">
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Sign Up</h2>
 
         {error && <p className="text-red-500 mb-4 text-center bg-red-100 p-2 rounded">{error}</p>}
-        {success && <p className="text-green-500 mb-4 text-center bg-green-100 p-2 rounded">{success}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -149,7 +170,7 @@ export default function SignUpForm() {
 
         <p className="text-center text-gray-600 mt-6">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600 hover:underline font-semibold">
+          <a href="/pages/login" className="text-blue-600 hover:underline font-semibold">
             Log in
           </a>
         </p>
@@ -157,4 +178,6 @@ export default function SignUpForm() {
     </div>
   );
 }
+
+
 
