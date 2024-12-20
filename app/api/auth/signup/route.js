@@ -16,46 +16,45 @@ export async function POST(req) {
 
   try {
     const { email, password, username } = await req.json();
-
-    // Sign up the user and include metadata
+    console.log("Received data:", { email, password, username });
+  
+    // Sign up the user
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          username, // Metadata to store in auth.users
+          username, // Add username to metadata
         },
       },
     });
-
+  
     if (error) {
+      console.error("SignUp Error:", error.message);
       return new Response(
         JSON.stringify({ error: error.message }),
         { status: 400 }
       );
     }
-
-    // Insert into the profiles table using user_id from auth.users
+  
+    // Insert into profiles table
     const { user } = data;
-
-    const { error: profileError } = await supabase
-      .from("profiles")
-      .insert({
-        user_id: user.id, // Use the user ID from auth.users
-        username,         // Pass username to profiles table
-        email,            // Optional: Store email in profiles table
-      });
-
+    const { error: profileError } = await supabase.from("profiles").insert({
+      user_id: user.id,
+      username,
+      email,
+    });
+  
     if (profileError) {
-      console.error("Error syncing with profiles:", profileError.message);
+      console.error("Profiles Table Error:", profileError.message);
       return new Response(
         JSON.stringify({ error: "Error syncing profile data" }),
         { status: 500 }
       );
     }
-
+  
     return new Response(
-      JSON.stringify({ message: "User signed up successfully", data }),
+      JSON.stringify({ message: "User signed up successfully" }),
       { status: 201 }
     );
   } catch (error) {
@@ -65,6 +64,7 @@ export async function POST(req) {
       { status: 500 }
     );
   }
+  
 }
 
 
