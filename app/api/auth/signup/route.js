@@ -17,18 +17,18 @@ export async function POST(req) {
   try {
     const { email, password, username } = await req.json();
     console.log("Received data:", { email, password, username });
-  
-    // Sign up the user
+
+    // Sign up the user (this automatically interacts with the auth.users table)
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          username, // Add username to metadata
+          username, // Add username as metadata
         },
       },
     });
-  
+
     if (error) {
       console.error("SignUp Error:", error.message);
       return new Response(
@@ -36,15 +36,25 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-  
-    // Insert into profiles table
-    const { user } = data;
+
+    // Extract the user's ID
+    const user = data.user;
+
+    if (!user) {
+      console.error("SignUp Error: User object is null");
+      return new Response(
+        JSON.stringify({ error: "User creation failed" }),
+        { status: 500 }
+      );
+    }
+
+    // Insert user details into the profiles table
     const { error: profileError } = await supabase.from("profiles").insert({
-      user_id: user.id,
+      user_id: user.id, // Use the user's ID from auth.users
       username,
       email,
     });
-  
+
     if (profileError) {
       console.error("Profiles Table Error:", profileError.message);
       return new Response(
@@ -52,9 +62,9 @@ export async function POST(req) {
         { status: 500 }
       );
     }
-  
+
     return new Response(
-      JSON.stringify({ message: "User signed up successfully" }),
+      JSON.stringify({ message: "User signed up successfully. Please verify your email." }),
       { status: 201 }
     );
   } catch (error) {
@@ -64,7 +74,6 @@ export async function POST(req) {
       { status: 500 }
     );
   }
-  
 }
 
 
