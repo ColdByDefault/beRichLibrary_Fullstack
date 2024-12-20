@@ -31,7 +31,7 @@ export const metadata = {
     siteName: "beRich.Library",
     images: [
       {
-        url: "https://berichlibrary.coldbydefault.com/beRich.png",
+        url: "https://berichlibrary.coldbydefault.com/beRich.png", // fixed image name
         width: 1200,
         height: 630,
         alt: "BeRich Library",
