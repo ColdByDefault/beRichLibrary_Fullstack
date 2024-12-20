@@ -30,25 +30,26 @@ export default function LoginForm() {
     e.preventDefault();
     setError(null);
     setSuccess(null);
-
+  
     const { email, password } = formData;
-
+  
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
-
+  
       setSuccess("Login successful!");
-      router.push("/"); // Redirect to the home page after success
+      router.push("/?welcome=true"); // Pass query parameter on successful login
     } catch (err) {
       setError(err.message);
     }
   };
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

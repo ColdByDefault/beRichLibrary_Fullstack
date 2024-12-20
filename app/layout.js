@@ -5,7 +5,6 @@
 // Version: 3.1.1
 // NOT TO BE USED WITHOUT PERMISSION FROM THE AUTHOR (www.coldbydefault.com {ColdByDefault})
 
-
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
@@ -22,6 +21,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://berichlibrary.coldbydefault.com"),
   title: "beRich.Library",
   description: "Personal Hub Created by ColdByDefault",
   openGraph: {
@@ -31,7 +31,7 @@ export const metadata = {
     siteName: "beRich.Library",
     images: [
       {
-        url: "/beRich.png", // fixed image name
+        url: "/beRich.png",
         width: 1200,
         height: 630,
         alt: "BeRich Library",
@@ -51,9 +51,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Navbar />
-        {/* Add a page transition wrapper */}
         <div id="page-content">{children}</div>
       </body>
     </html>
